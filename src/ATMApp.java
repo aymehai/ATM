@@ -1,9 +1,10 @@
+import java.util.Random;
 import java.util.Scanner;
 import java.lang.Math;
-
 public class ATMApp {
 	public static void main(String[] args) {
-
+		
+		//program
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("Hello would you like to create an account? yes/no");
 		String userInput = keyboard.nextLine();
@@ -19,7 +20,7 @@ public class ATMApp {
 			// rounds user deposit to two decimal places
 			deposit = Math.round(deposit * 100.0) / 100.0;
 			// prompts user for a user name
-			System.out.println("Please enter a userName for your account.");
+			System.out.println("Please enter a user name for your account.");
 			String userName = keyboard.next();
 			// creates object ATM
 			ATM user1 = new ATM(name, deposit, userName);
@@ -35,38 +36,40 @@ public class ATMApp {
 				userNumber = keyboard.nextInt();
 				if (userNumber < 4 && userNumber >= 1) {
 					// prompts user for user name
-					System.out.println("In order to continue please enter your user name");
-					userInput = keyboard.next();
-					if (userInput.equals(user1.getUserName())) {
+					System.out.println("In order to continue please enter your account number");
+					int userAccountNumber = keyboard.nextInt();
+					if (userAccountNumber == user1.getAccountNumber()) {
 						// prompts user for pin
-						System.out.println("Now I need to ask you what is your pin");
-						int userPin = keyboard.nextInt();
-						if (userPin == user1.getPin()) {
-							// checks user number choice
-							if (userNumber == 1) {
-								// prompts user how much to withdraw
-								System.out.println("How much would you like to withdraw?");
-								double money = keyboard.nextDouble();
-								System.out.println(user1.withdraw(money));
-								System.out.println("Thank you for using the ATM");
-								break;
+						for (int i = 1; i < 4; i++) {
+							System.out.println("What is your pin");
+							int userPin = keyboard.nextInt();
+							if (userPin == user1.getPin()) {
+								// checks user number choice
+								if (userNumber == 1) {
+									// prompts user how much to withdraw
+									System.out.println("How much would you like to withdraw?");
+									double money = keyboard.nextDouble();
+									user1.withdraw(money);
+									System.out.println(user1.receipt());
 
-							} else if (userNumber == 2) {
-								// prompts user how much to deposit
-								System.out.println("How much would you like to deposit?");
-								double money = keyboard.nextDouble();
-								System.out.println(user1.deposit(money));
-								System.out.println("Thank you for using the ATM");
-								break;
-							} else if (userNumber == 3) {
-								// gets user balance
-								System.out.println("Here is your balance: " + user1.getBalance());
-								System.out.println("Thank you for using the ATM");
-								break;
+								} else if (userNumber == 2) {
+									// prompts user how much to deposit
+									System.out.println("How much would you like to deposit?");
+									double money = keyboard.nextDouble();
+									user1.withdraw(money);
+									System.out.println(user1.receipt());
+								} else if (userNumber == 3) {
+									// gets user balance
+									System.out.println("Here is your balance: " + user1.getBalance());
+									System.out.println("Thank you for using the ATM");
+									break;
+								}
+							} else {
+								System.out.println("sorry wrong pin");
 							}
-						} else {
-							System.out.println("sorry wrong pin");
 						}
+						System.out.println("you have no been locked out of your account");
+						break;
 					} else {
 						System.out.println("userName does not exist");
 					}

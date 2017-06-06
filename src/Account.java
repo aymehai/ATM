@@ -6,6 +6,8 @@ public class Account {
 	private String name;
 	private double balance;
 	private int pin;
+	private double amount;
+	private String trasactionId;
 
 	public Account(String name, double money, String userName) {
 		SecureRandom randomHash = new SecureRandom();
@@ -37,17 +39,22 @@ public class Account {
 
 	// Balance Methods
 	public double getBalance() {
+		this.trasactionId = "check balance";
 		return balance;
 	}
 
 	public String deposit(double money) {
+		this.trasactionId = "deposit";
+		this.amount = money;
 		this.balance = balance + money;
-		return "Balance: " + balance;
+		return "" + balance;
 	}
 
 	public String withdraw(double money) {
+		this.trasactionId = "withdraw";
+		this.amount = money;
 		this.balance = balance - money;
-		return "Balance: " + balance;
+		return "" + balance;
 	}
 
 	//Pin Methods
@@ -67,6 +74,14 @@ public class Account {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public double getAmount(){
+		return amount;
+	}
+	
+	public String getTrasactionId(){
+		return trasactionId;
 	}
 
 }

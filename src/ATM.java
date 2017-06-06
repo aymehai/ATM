@@ -2,6 +2,7 @@
 public class ATM implements IATM {
 
 	private Account account;
+	private Receipt receipt;
 
 	public ATM(String name, double money, String userName) {
 		this.account = new Account(name, money, userName);
@@ -41,4 +42,14 @@ public class ATM implements IATM {
 	public int getPin() {
 		return account.getPin();
 	}
+
+	public int getAccountNumber() {
+		return account.getAccountNumber();
+	}
+
+	public String receipt() {
+		receipt.transactionRecepit();
+		return " ";
+	}
+
 }
